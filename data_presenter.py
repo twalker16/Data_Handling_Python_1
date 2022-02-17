@@ -29,16 +29,22 @@ total = 0
 # print(total)
 # Close your open file.
 chocolate_count = 0
+chocolate_sales = 0
 vanilla_count = 0
+vanilla_sales = 0
 strawberry_count = 0
+strawberry_sales = 0
 for row in open_file:
     row = row.split(',')
     if row[2] == 'Chocolate':
         chocolate_count += 1
+        chocolate_sales += float(round((float(row[3])*float(row[4])), 2))
     elif row[2] == 'Vanilla':
         vanilla_count += 1
+        vanilla_sales += float(round((float(row[3])*float(row[4])), 2))
     elif row[2] == 'Strawberry':
         strawberry_count += 1
+        strawberry_sales += float(round((float(row[3])*float(row[4])), 2))
 
 
 open_file.close()
@@ -46,17 +52,19 @@ open_file.close()
 
 # Going Further
 # Explore the graphing tools covered in today’s lecture. See if you can implement one of them to display the total income of chocolate cupcakes vs vanilla cupcakes vs strawberry cupcakes.
-
-
-
 import matplotlib.pyplot as plt
 
 names = ['Chocolate', 'Vanilla', 'Strawberry']
 values =[chocolate_count, vanilla_count, strawberry_count]
+values2 =[chocolate_sales, vanilla_sales, strawberry_sales]
 
-plt.figure(figsize=(9, 3))
+plt.figure(figsize=(9, 2))
 
-plt.subplot(132)
+plt.subplot(131)
+plt.title('# of orders')
 plt.bar(names, values)
+plt.subplot(133)
+plt.title('sales revenue')
+plt.bar(names, values2)
 plt.suptitle('Cupcake popularity')
 plt.show()
